@@ -1,18 +1,105 @@
-from bank_ocr.convert_input import parse_account
+from convert_input import _parse_digit
+import pytest
+
+digit_test_data = [
+    (
+        """
+         _ 
+        | |
+        |_|
+        
+        """,
+        '0'
+    ),
+    (
+        """
+        
+          |
+          |
+        
+        """,
+        '1'
+    ),
+    (
+        """
+         _  
+         _|
+        |_ 
+        
+        """,
+        '2'
+    ),
+    (
+        """
+         _ 
+         _|
+         _|
+        
+        """,
+        '3'
+    ),
+    (
+        """
+        
+        |_|
+          |
+        
+        """,
+        '4'
+    ),
+    (
+        """
+         _  
+        |_  
+         _|
+        
+        """,
+        '5'
+    ),
+    (
+        """
+         _ 
+        |_  
+        |_|
+        
+        """,
+        '6'
+    ),
+    (
+        """
+         _ 
+          |
+          |
+
+        """,
+        '7'
+    ),
+    (
+        """
+         _ 
+        |_|
+        |_|
+        
+        """,
+        '8'
+    ),
+    (
+        """
+         _ 
+        |_|
+         _|
+        
+        """,
+        '9'
+    ),
+]
 
 
-def test_full_zero_entry():
+@pytest.mark.parametrize('input_digit,expected', digit_test_data)
+def test_parse_one_digit(input_digit, expected):
     # Given
-    input = """
-     _  _  _  _  _  _  _  _  _ 
-    | || || || || || || || || |
-    |_||_||_||_||_||_||_||_||_|
-    
-    """
-
     # When
-    actual = parse_account(input)
+    actual = _parse_digit(digit_str=input_digit)
 
     # Then
-    expected = "000000000"
     assert actual == expected

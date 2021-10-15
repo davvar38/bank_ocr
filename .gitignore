@@ -1,4 +1,6 @@
 *.iml
 .idea/
-.venv/
+bank_ocr/.venv/
 .pytest_cache/
+__pycache__/
+*.pyc
